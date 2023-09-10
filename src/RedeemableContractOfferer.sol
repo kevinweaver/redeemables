@@ -30,7 +30,7 @@ import {CampaignParams} from "./lib/RedeemableStructs.sol";
  * @author ryanio, stephankmin
  * @notice A Seaport contract offerer that allows users to burn to redeem off chain redeemables.
  */
-contract RedeemableContractOfferer is
+contract Redeemer is
     ContractOffererInterface,
     RedeemableErrorsAndEvents,
     SignedRedeemContractOfferer

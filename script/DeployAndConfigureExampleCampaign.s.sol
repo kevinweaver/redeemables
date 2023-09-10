@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
+
 import "forge-std/Script.sol";
 
 import {ItemType} from "seaport-types/src/lib/ConsiderationEnums.sol";
 import {OfferItem, ConsiderationItem} from "seaport-types/src/lib/ConsiderationStructs.sol";
-import {RedeemableContractOfferer} from "../src/RedeemableContractOfferer.sol";
+import {Redeemer} from "../src/RedeemableContractOfferer.sol";
 import {CampaignParams} from "../src/lib/RedeemableStructs.sol";
-import {ERC721RedemptionMintable} from "../src/lib/ERC721RedemptionMintable.sol";
-import {TestERC721} from "../test/utils/mocks/TestERC721.sol";
+import {Gatchabot} from "../src/lib/ERC721RedemptionMintable.sol";
+import {TestERC1155} from "../test/utils/mocks/TestERC1155.sol";
 
 contract DeployAndConfigureExampleCampaign is Script {
     // Addresses: Seaport
@@ -21,13 +22,13 @@ contract DeployAndConfigureExampleCampaign is Script {
     function run() external {
         vm.startBroadcast();
 
-        RedeemableContractOfferer offerer = new RedeemableContractOfferer(
+        RedeemableContractOfferer offerer = new Redeemer(
             conduit,
             conduitKey,
             seaport
         );
-        TestERC721 redeemableToken = new TestERC721();
-        ERC721RedemptionMintable redemptionToken = new ERC721RedemptionMintable(
+        TestERC721 redeemableToken = new RedeemableCapsule();
+        Gatchabot redemptionToken = new Gatchabot(
             address(offerer),
             address(redeemableToken)
         );
